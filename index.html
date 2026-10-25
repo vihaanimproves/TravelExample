@@ -1,0 +1,353 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>WanderLust — Beyond Places, Into Moments</title>
+  <meta name="description" content="WanderLust plans trips for the moments you'll still talk about years later.">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;500;700&family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <script>document.documentElement.classList.add('js')</script>
+</head>
+<body>
+
+  <!-- ============================== HEADER ============================== -->
+  <header class="site-header" id="header">
+    <a class="logo" href="#top" data-scroll><i>W</i>ander<i>L</i>ust</a>
+
+    <nav class="nav" aria-label="Main">
+      <a href="#destinations" data-scroll>Journal.</a>
+      <a href="#experiences" data-scroll>Experiences.</a>
+      <a href="#about" data-scroll>About.</a>
+      <a href="#contact" data-scroll>Contact.</a>
+    </nav>
+
+    <a class="explore" href="#destinations" data-scroll>
+      <svg class="ico-arrow" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 1.5v7.5h10.5M10 5.5l3.5 3.5-3.5 3.5"/></svg>
+      <span>Explore destinations</span>
+    </a>
+  </header>
+
+  <main>
+
+    <!-- =============================== HERO =============================== -->
+    <section class="hero" id="top">
+      <div class="hero-media" id="heroMedia">
+        <!-- Still image: the last frame of the intro (close-up of the hiker). Shown if hero.mp4 is missing. -->
+        <img class="hero-still" src="images/hero.jpg" alt="">
+        <!-- Optional intro clip (push-in on the hiker). Plays once and holds on its last frame. -->
+        <video class="hero-video" src="images/hero.mp4" muted playsinline preload="auto"></video>
+      </div>
+      <div class="hero-shade"></div>
+
+      <!-- Peeking slider thumbnails (top & bottom centre) -->
+      <div class="hero-thumb hero-thumb--top"><img src="images/hero-thumb-top.jpg" alt=""></div>
+      <div class="hero-thumb hero-thumb--bottom"><img src="images/hero-thumb-bottom.jpg" alt=""></div>
+
+      <!-- Cursor-following card. The window reveals images/hero-reveal.jpg -->
+      <div class="lens" id="lens" aria-hidden="true">
+        <div class="lens-row lens-row--top"><span>Travel stories</span><span>Journal</span></div>
+        <div class="lens-window" id="lensWindow">
+          <img class="lens-img" id="lensImg" src="images/hero-reveal.jpg" alt="" data-fallback="images/hero.jpg">
+          <span class="lens-dot"></span>
+          <span class="lens-cross"></span>
+        </div>
+        <div class="lens-row lens-row--bottom"><span>01.</span><span>Real journeys</span><span>42.</span></div>
+      </div>
+
+      <h1 class="hero-title">
+        <span class="hero-title-left" data-split="words"><i>B</i>eyond<br><i>P</i>laces</span>
+        <span class="hero-title-right" data-split="words"><i>I</i>nto<br><i>M</i>oments</span>
+      </h1>
+
+      <div class="view-toggle" role="group" aria-label="View"><button class="is-active" type="button">Slider</button><span class="sep"> / </span><button type="button">List</button></div>
+
+      <ul class="dest-filter" aria-label="Filter destinations">
+        <li class="is-active" tabindex="0">All destinations</li>
+        <li tabindex="0">Iceland</li>
+        <li tabindex="0">Norway</li>
+        <li tabindex="0">Japan</li>
+        <li tabindex="0">Indonesia</li>
+      </ul>
+    </section>
+
+
+    <!-- =========================== DESTINATIONS =========================== -->
+    <section class="dest" id="destinations">
+      <div class="frame">
+        <h2 class="dest-title" data-split="words"><i>D</i>estinations<br><i>W</i>orth <i>W</i>andering</h2>
+
+        <ol class="dest-list dest-list--left">
+          <li data-key="iceland" class="is-active"><span class="num">01.</span><span>Iceland</span></li>
+          <li data-key="norway"><span class="num">02.</span><span>Norway</span></li>
+          <li data-key="japan"><span class="num">03.</span><span>Japan</span></li>
+          <li data-key="morocco"><span class="num">04.</span><span>Morocco</span></li>
+          <li data-key="switzerland"><span class="num">05.</span><span>Switzerland</span></li>
+          <li data-key="italy"><span class="num">06.</span><span>Italy</span></li>
+          <li data-key="france"><span class="num">07.</span><span>France</span></li>
+          <li data-key="portugal"><span class="num">08.</span><span>Portugal</span></li>
+        </ol>
+
+        <ol class="dest-list dest-list--right">
+          <li data-key="spain"><span>Spain</span><span class="num">09.</span></li>
+          <li data-key="greece"><span>Greece</span><span class="num">10.</span></li>
+          <li data-key="austria"><span>Austria</span><span class="num">11.</span></li>
+          <li data-key="canada"><span>Canada</span><span class="num">12.</span></li>
+          <li data-key="new-zealand"><span>New Zealand</span><span class="num">13.</span></li>
+          <li data-key="australia"><span>Australia</span><span class="num">14.</span></li>
+          <li data-key="slovenia"><span>Slovenia</span><span class="num">15.</span></li>
+          <li data-key="istanbul"><span>Istanbul</span><span class="num">16.</span></li>
+        </ol>
+
+        <!--
+          Polaroids. Positions are in design pixels on a 1920×1080 frame:
+          --x / --y = centre, --w / --h = card size, --r = rotation (deg).
+          Listed bottom-to-top (later = on top).
+        -->
+        <div class="pol-clip">
+          <div class="pol-stage" id="polStage">
+            <figure class="pol" data-key="switzerland" style="--x:231;--y:208;--w:185;--h:260;--r:-22">
+              <div class="pol-inner"><div class="pol-photo"><img src="images/dest-switzerland.jpg" alt="Switzerland"></div><figcaption><i>S</i>witzerland</figcaption>
+                <img class="sticker" src="images/sticker-swiss-flag.png" alt="" style="--sx:70;--sy:30;--sw:104;--sr:8"></div>
+            </figure>
+            <figure class="pol" data-key="norway" style="--x:415;--y:283;--w:210;--h:188;--r:8">
+              <div class="pol-inner"><div class="pol-photo"><img src="images/dest-norway.jpg" alt="Norway"></div><figcaption><i>N</i>orway</figcaption></div>
+            </figure>
+            <figure class="pol" data-key="austria" style="--x:1552;--y:310;--w:182;--h:308;--r:-17">
+              <div class="pol-inner"><div class="pol-photo"><img src="images/dest-austria.jpg" alt="Austria"></div><figcaption><i>A</i>ustria</figcaption></div>
+            </figure>
+            <figure class="pol" data-key="greece" style="--x:1720;--y:235;--w:180;--h:260;--r:32">
+              <div class="pol-inner"><div class="pol-photo"><img src="images/dest-greece.jpg" alt="Greece"></div><figcaption><i>G</i>reece</figcaption></div>
+            </figure>
+            <figure class="pol" data-key="new-zealand" style="--x:1842;--y:295;--w:200;--h:230;--r:-12">
+              <div class="pol-inner"><div class="pol-photo"><img src="images/dest-new-zealand.jpg" alt="New Zealand"></div><figcaption><i>N</i>ew <i>Z</i>ealand</figcaption></div>
+            </figure>
+            <figure class="pol" data-key="italy" style="--x:376;--y:663;--w:204;--h:320;--r:-7">
+              <div class="pol-inner"><div class="pol-photo"><img src="images/dest-italy.jpg" alt="Italy"></div><figcaption><i>I</i>taly</figcaption></div>
+            </figure>
+            <figure class="pol" data-key="japan" style="--x:574;--y:567;--w:214;--h:177;--r:18">
+              <div class="pol-inner"><div class="pol-photo"><img src="images/dest-japan.jpg" alt="Japan"></div><figcaption><i>J</i>apan</figcaption>
+                <img class="sticker" src="images/sticker-lupine.png" alt="" style="--sx:14;--sy:112;--sw:40;--sr:-8"></div>
+            </figure>
+            <figure class="pol" data-key="morocco" style="--x:492;--y:832;--w:188;--h:249;--r:19">
+              <div class="pol-inner"><div class="pol-photo"><img src="images/dest-morocco.jpg" alt="Morocco"></div><figcaption><i>M</i>orocco</figcaption></div>
+            </figure>
+            <figure class="pol" data-key="istanbul" style="--x:866;--y:581;--w:207;--h:190;--r:-11">
+              <div class="pol-inner"><div class="pol-photo"><img src="images/dest-istanbul.jpg" alt="Istanbul"></div><figcaption><i>I</i>stanbul</figcaption></div>
+            </figure>
+            <figure class="pol" data-key="slovenia" style="--x:788;--y:721;--w:185;--h:318;--r:-16">
+              <div class="pol-inner"><div class="pol-photo"><img src="images/dest-slovenia.jpg" alt="Slovenia"></div><figcaption><i>S</i>lovenia</figcaption>
+                <img class="sticker" src="images/sticker-stamp.png" alt="" style="--sx:163;--sy:46;--sw:38;--sr:-6"></div>
+            </figure>
+            <figure class="pol" data-key="france" style="--x:966;--y:699;--w:187;--h:313;--r:21">
+              <div class="pol-inner"><div class="pol-photo"><img src="images/dest-france.jpg" alt="France"></div><figcaption><i>F</i>rance</figcaption></div>
+            </figure>
+            <figure class="pol" data-key="iceland" style="--x:1318;--y:627;--w:180;--h:260;--r:30">
+              <div class="pol-inner"><div class="pol-photo"><img src="images/dest-iceland.jpg" alt="Iceland"></div><figcaption><i>I</i>celand</figcaption>
+                <img class="sticker" src="images/sticker-iceland-flag.png" alt="" style="--sx:170;--sy:36;--sw:42;--sr:-28"></div>
+            </figure>
+            <figure class="pol" data-key="spain" style="--x:1160;--y:660;--w:190;--h:308;--r:1">
+              <div class="pol-inner"><div class="pol-photo"><img src="images/dest-spain.jpg" alt="Spain"></div><figcaption><i>S</i>pain</figcaption></div>
+            </figure>
+            <figure class="pol" data-key="canada" style="--x:1076;--y:891;--w:216;--h:195;--r:-7">
+              <div class="pol-inner"><div class="pol-photo"><img src="images/dest-canada.jpg" alt="Canada"></div><figcaption><i>C</i>anada</figcaption></div>
+            </figure>
+            <figure class="pol" data-key="portugal" style="--x:1544;--y:881;--w:190;--h:262;--r:29">
+              <div class="pol-inner"><div class="pol-photo"><img src="images/dest-portugal.jpg" alt="Portugal"></div><figcaption><i>P</i>ortugal</figcaption></div>
+            </figure>
+            <figure class="pol" data-key="australia" style="--x:1431;--y:767;--w:204;--h:185;--r:-6">
+              <div class="pol-inner"><div class="pol-photo"><img src="images/dest-australia.jpg" alt="Australia"></div><figcaption><i>A</i>ustralia</figcaption></div>
+            </figure>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ===================== GO SOMEWHERE (pinned reveal) ===================== -->
+    <section class="stays" id="about">
+      <div class="stays-pin">
+        <div class="stays-bg" id="staysBg"><img src="images/stays-bg.jpg" alt=""></div>
+        <div class="stays-shade" id="staysShade"></div>
+
+        <div class="frame">
+          <h2 class="stays-title" id="staysTitle" data-split="chars"><i>G</i>o <i>S</i>omewhere <i>T</i>hat<br><i>S</i>tays <i>W</i>ith <i>Y</i>ou</h2>
+
+          <figure class="stays-collage" id="staysCollage">
+            <!-- The scrapbook collage (polaroid + torn paper + tape + note) as one transparent PNG -->
+            <img src="images/stays-collage.png" alt="Traveller with arms wide open on a mountain trail">
+          </figure>
+
+          <p class="stays-side stays-side--left" data-split="words">We plan trips for the<br>moments you’ll still talk<br>about years later.</p>
+          <p class="stays-side stays-side--right" data-split="words">The quiet mornings, the<br>unexpected turns, the places<br>you almost didn’t find.</p>
+
+          <p class="stays-hand" id="staysHand">Less ticking places off a list.<br>More actually being there.</p>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ============================ HOW WE TRAVEL ============================ -->
+    <section class="how" id="experiences">
+      <div class="how-cols" id="howCols">
+
+        <article class="how-col is-active" tabindex="0">
+          <div class="how-img how-img--dim"><img src="images/travel-small-group.jpg" alt=""></div>
+          <div class="how-img how-img--lit"><img src="images/travel-small-group.jpg" alt="Small group celebrating on a mountain top"></div>
+          <h3 class="how-label"><i>S</i>mall <i>G</i>roup <i>T</i>rips</h3>
+          <div class="how-body">
+            <h3 class="how-name" data-split="words"><i>S</i>mall <i>G</i>roup <i>T</i>rips</h3>
+            <p class="how-desc" data-split="words">We travel in small groups so everyone feels<br>included, heard and free to be themselves.</p>
+            <p class="how-hand" data-split="words">More connection, less crowd.</p>
+          </div>
+        </article>
+
+        <article class="how-col" tabindex="0">
+          <div class="how-img how-img--dim"><img src="images/travel-road-trips.jpg" alt=""></div>
+          <div class="how-img how-img--lit"><img src="images/travel-road-trips.jpg" alt="Car driving through a mountain landscape"></div>
+          <h3 class="how-label"><i>R</i>oad <i>T</i>rips</h3>
+          <div class="how-body">
+            <h3 class="how-name" data-split="words"><i>R</i>oad <i>T</i>rips</h3>
+            <p class="how-desc" data-split="words">Scenic roads, unexpected stops and the freedom<br>to change the plan when it feels right.</p>
+            <p class="how-hand" data-split="words">The best views aren’t on Google Maps.</p>
+          </div>
+        </article>
+
+        <article class="how-col" tabindex="0">
+          <div class="how-img how-img--dim"><img src="images/travel-handpicked-stays.jpg" alt=""></div>
+          <div class="how-img how-img--lit"><img src="images/travel-handpicked-stays.jpg" alt="Waterfall and river"></div>
+          <h3 class="how-label"><i>H</i>andpicked <i>S</i>tays</h3>
+          <div class="how-body">
+            <h3 class="how-name" data-split="words"><i>H</i>andpicked <i>S</i>tays</h3>
+            <p class="how-desc" data-split="words">We choose places with soul. Local, beautiful,<br>comfortable and run by people who care.</p>
+            <p class="how-hand" data-split="words">Stay somewhere you’ll remember.</p>
+          </div>
+        </article>
+
+        <article class="how-col" tabindex="0">
+          <div class="how-img how-img--dim"><img src="images/travel-local-experiences.jpg" alt=""></div>
+          <div class="how-img how-img--lit"><img src="images/travel-local-experiences.jpg" alt="Travellers sharing a meal outdoors"></div>
+          <h3 class="how-label"><i>L</i>ocal <i>E</i>xperiences</h3>
+          <div class="how-body">
+            <h3 class="how-name" data-split="words"><i>L</i>ocal <i>E</i>xperiences</h3>
+            <p class="how-desc" data-split="words">We meet local people, try real food, learn the stories<br>and see the places that don’t make it to the guidebooks.</p>
+            <p class="how-hand" data-split="words">The heart of the journey.</p>
+          </div>
+        </article>
+
+      </div>
+
+      <div class="how-head">
+        <h2 class="how-title" data-split="words"><i>H</i>ow <i>W</i>e <i>T</i>ravel</h2>
+        <p class="how-sub">Different trips, same intention.</p>
+      </div>
+    </section>
+
+
+    <!-- ======================= PLAN A JOURNEY + FOOTER ======================= -->
+    <div class="plan-wrap" id="contact">
+      <div class="plan-bg"><img src="images/plan-bg.jpg" alt=""></div>
+
+      <section class="plan" id="plan">
+        <h2 class="plan-title" data-split="words"><i>P</i>lan a <i>J</i>ourney</h2>
+
+        <div class="note" id="note">
+          <svg class="pin" viewBox="0 0 160 200" aria-hidden="true">
+            <defs>
+              <radialGradient id="pinKnob" cx="35%" cy="30%" r="75%">
+                <stop offset="0" stop-color="#ff5a5f"/>
+                <stop offset=".5" stop-color="#e3101c"/>
+                <stop offset="1" stop-color="#9a0610"/>
+              </radialGradient>
+              <radialGradient id="pinBase" cx="35%" cy="35%" r="80%">
+                <stop offset="0" stop-color="#ff4d55"/>
+                <stop offset=".55" stop-color="#d90d19"/>
+                <stop offset="1" stop-color="#8e050e"/>
+              </radialGradient>
+              <linearGradient id="pinNeck" x1="0" x2="1">
+                <stop offset="0" stop-color="#b70a14"/>
+                <stop offset=".45" stop-color="#ff3b44"/>
+                <stop offset="1" stop-color="#a5070f"/>
+              </linearGradient>
+              <filter id="pinBlur" x="-80%" y="-80%" width="260%" height="260%"><feGaussianBlur stdDeviation="9"/></filter>
+            </defs>
+            <!-- cast shadow -->
+            <ellipse cx="42" cy="148" rx="17" ry="52" transform="rotate(28 42 148)" fill="rgba(0,0,0,.5)" filter="url(#pinBlur)"/>
+            <!-- needle -->
+            <path d="M75 103 L69 116" stroke="#7a7a7a" stroke-width="2.6" stroke-linecap="round"/>
+            <!-- base -->
+            <ellipse cx="82" cy="88" rx="27" ry="24" fill="url(#pinBase)"/>
+            <ellipse cx="71" cy="80" rx="7" ry="4" fill="rgba(255,255,255,.55)" transform="rotate(-30 71 80)"/>
+            <!-- neck -->
+            <path d="M82 52 C 84 62, 82 70, 74 80 C 82 86, 92 86, 96 80 C 94 70, 98 62, 104 54 Z" fill="url(#pinNeck)"/>
+            <!-- knob -->
+            <ellipse cx="93" cy="40" rx="23" ry="21" fill="url(#pinKnob)"/>
+            <ellipse cx="86" cy="30" rx="7" ry="4.5" fill="rgba(255,255,255,.6)" transform="rotate(-28 86 30)"/>
+          </svg>
+
+          <p class="note-text" id="noteText">Tell us <span class="ul">what you’re</span><br><span class="ul">dreaming of</span>. We’ll shape<br>the journey.</p>
+          <p class="note-ready" id="noteReady">ready when you are</p>
+        </div>
+
+        <a class="btn-plan" id="btnPlan" href="mailto:hello@wanderlust.travel">
+          <svg class="ico-arrow" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 1.5v7.5h10.5M10 5.5l3.5 3.5-3.5 3.5"/></svg>
+          <span>Start planning</span>
+        </a>
+      </section>
+
+      <footer class="footer">
+        <div class="footer-top">
+          <a class="footer-logo" href="#top" data-scroll><i>W</i>ander<i>L</i>ust</a>
+
+          <div class="footer-col" style="--col:470">
+            <h4>Destinations</h4>
+            <a href="#destinations" data-scroll>Iceland</a>
+            <a href="#destinations" data-scroll>Norway</a>
+            <a href="#destinations" data-scroll>Japan</a>
+            <a href="#destinations" data-scroll>Indonesia</a>
+          </div>
+          <div class="footer-col" style="--col:702">
+            <h4>Experiences</h4>
+            <a href="#experiences" data-scroll>Adventure</a>
+            <a href="#experiences" data-scroll>Nature</a>
+            <a href="#experiences" data-scroll>Culture</a>
+            <a href="#experiences" data-scroll>Slow travel</a>
+          </div>
+          <div class="footer-col" style="--col:925">
+            <h4>Company</h4>
+            <a href="#about" data-scroll>About us</a>
+            <a href="#destinations" data-scroll>Journal</a>
+            <a href="#about" data-scroll>Testimonials</a>
+            <a href="#contact" data-scroll>Contact</a>
+          </div>
+
+          <form class="newsletter" id="newsletter">
+            <p>Stories, guides &amp; ideas for wherever<br>you’re headed next.</p>
+            <label class="nl-field">
+              <input type="email" name="email" placeholder="Your e-mail" required aria-label="Your e-mail">
+              <button type="submit" aria-label="Subscribe"><svg class="ico-arrow" viewBox="0 0 16 16"><path d="M3 1.5v7.5h10.5M10 5.5l3.5 3.5-3.5 3.5"/></svg></button>
+            </label>
+          </form>
+        </div>
+
+        <div class="footer-bottom">
+          <p>© 2024 Wanderlust. All rights reserved.</p>
+          <div class="socials">
+            <a href="#" aria-label="Instagram"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="12" class="bg"/><rect x="6.5" y="6.5" width="11" height="11" rx="3.2" class="fg-stroke"/><circle cx="12" cy="12" r="2.7" class="fg-stroke"/><circle cx="15.3" cy="8.7" r=".8" class="fg"/></svg></a>
+            <a href="#" aria-label="Facebook"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="12" class="bg"/><path class="fg" d="M13.2 19v-6.1h2.1l.3-2.4h-2.4V9c0-.7.2-1.2 1.2-1.2h1.3V5.6c-.2 0-1-.1-1.9-.1-1.9 0-3.1 1.1-3.1 3.2v1.8H8.6v2.4h2.1V19z"/></svg></a>
+            <a href="#" aria-label="YouTube"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="12" class="bg"/><rect x="5.5" y="7.6" width="13" height="8.8" rx="2.6" class="fg-stroke"/><path class="fg" d="M10.8 10.1v3.8l3.2-1.9z"/></svg></a>
+          </div>
+        </div>
+      </footer>
+    </div>
+
+  </main>
+
+  <!-- Smooth scrolling (optional — the site works without it) -->
+  <script src="https://unpkg.com/lenis@1.1.13/dist/lenis.min.js" defer></script>
+  <script src="js/main.js" defer></script>
+</body>
+</html>
