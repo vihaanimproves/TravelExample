@@ -535,7 +535,98 @@ img.is-missing { visibility: hidden; }
   opacity: 0;
   will-change: transform, opacity;
 }
-.stays-collage img { width: 100%; height: auto; filter: drop-shadow(0 calc(18 * var(--p)) calc(30 * var(--p)) rgba(0, 0, 0, .35)); }
+.stays-collage > img { width: 100%; height: auto; filter: drop-shadow(0 calc(18 * var(--p)) calc(30 * var(--p)) rgba(0, 0, 0, .35)); }
+
+/* --- built-in scrapbook (used when the figure has .stays-collage--diy) --- */
+.stays-collage--diy { height: calc(537 * var(--p)); }
+.stays-collage--diy > div { position: absolute; }
+.sc-postcard {
+  left: calc(4 * var(--p));
+  top: calc(10 * var(--p));
+  width: calc(206 * var(--p));
+  height: calc(128 * var(--p));
+  padding: calc(18 * var(--p)) 0 0 calc(16 * var(--p));
+  transform: rotate(13deg);
+  background: linear-gradient(90deg, transparent 58%, rgba(60, 60, 70, .25) 58%, rgba(60, 60, 70, .25) calc(58% + 1px), transparent calc(58% + 1px)), #f1ede4;
+  box-shadow: 0 calc(6 * var(--p)) calc(16 * var(--p)) rgba(0, 0, 0, .35);
+  font: 400 calc(19 * var(--p)) / 1.05 var(--hand);
+  color: #3f4150;
+}
+.sc-postcard::after {
+  content: '';
+  position: absolute;
+  right: calc(12 * var(--p));
+  top: calc(12 * var(--p));
+  width: calc(32 * var(--p));
+  height: calc(38 * var(--p));
+  border: 1px solid rgba(60, 60, 70, .4);
+}
+.sc-paper {
+  background-color: #f6f5f1;
+  background-image:
+    repeating-linear-gradient(180deg, transparent 0 calc(23 * var(--p)), rgba(90, 120, 190, .22) calc(23 * var(--p)) calc(24 * var(--p)));
+  filter: drop-shadow(0 calc(6 * var(--p)) calc(10 * var(--p)) rgba(0, 0, 0, .3));
+}
+.sc-paper--left {
+  left: calc(16 * var(--p));
+  top: calc(160 * var(--p));
+  width: calc(120 * var(--p));
+  height: calc(314 * var(--p));
+  transform: rotate(-2deg);
+  background-image:
+    radial-gradient(circle at calc(30 * var(--p)) 50%, #191919 0 calc(6.5 * var(--p)), transparent calc(7 * var(--p))),
+    linear-gradient(90deg, transparent calc(50 * var(--p)), rgba(210, 70, 70, .45) calc(50 * var(--p)) calc(51 * var(--p)), transparent calc(51 * var(--p))),
+    repeating-linear-gradient(180deg, transparent 0 calc(23 * var(--p)), rgba(90, 120, 190, .22) calc(23 * var(--p)) calc(24 * var(--p)));
+  background-size: 100% calc(47 * var(--p)), 100% 100%, 100% 100%;
+  background-position: 0 calc(22 * var(--p)), 0 0, 0 0;
+  clip-path: polygon(100% 0, 100% 100%, calc(2.3 * var(--p)) 100.0%, calc(1.1 * var(--p)) 96.2%, calc(4.6 * var(--p)) 92.3%, calc(0.5 * var(--p)) 88.5%, calc(3.8 * var(--p)) 84.6%, calc(2.6 * var(--p)) 80.8%, calc(0.4 * var(--p)) 76.9%, calc(3.6 * var(--p)) 73.1%, calc(0.3 * var(--p)) 69.2%, calc(3.0 * var(--p)) 65.4%, calc(0.5 * var(--p)) 61.5%, calc(0.6 * var(--p)) 57.7%, calc(3.0 * var(--p)) 53.8%, calc(5.8 * var(--p)) 50.0%, calc(0.9 * var(--p)) 46.2%, calc(1.6 * var(--p)) 42.3%, calc(4.4 * var(--p)) 38.5%, calc(6.6 * var(--p)) 34.6%, calc(4.0 * var(--p)) 30.8%, calc(2.8 * var(--p)) 26.9%, calc(6.8 * var(--p)) 23.1%, calc(0.3 * var(--p)) 19.2%, calc(6.0 * var(--p)) 15.4%, calc(2.0 * var(--p)) 11.5%, calc(1.0 * var(--p)) 7.7%, calc(0.8 * var(--p)) 3.8%, calc(2.2 * var(--p)) 0.0%);
+}
+.sc-paper--right {
+  left: calc(338 * var(--p));
+  top: calc(146 * var(--p));
+  width: calc(150 * var(--p));
+  height: calc(326 * var(--p));
+  transform: rotate(3deg);
+  clip-path: polygon(0 0, calc(100% - 5.7 * var(--p)) 0.0%, calc(100% - 1.3 * var(--p)) 3.8%, calc(100% - 4.1 * var(--p)) 7.7%, calc(100% - 4.5 * var(--p)) 11.5%, calc(100% - 2.6 * var(--p)) 15.4%, calc(100% - 3.8 * var(--p)) 19.2%, calc(100% - 0.4 * var(--p)) 23.1%, calc(100% - 0.4 * var(--p)) 26.9%, calc(100% - 1.4 * var(--p)) 30.8%, calc(100% - 4.8 * var(--p)) 34.6%, calc(100% - 3.0 * var(--p)) 38.5%, calc(100% - 2.2 * var(--p)) 42.3%, calc(100% - 4.1 * var(--p)) 46.2%, calc(100% - 3.2 * var(--p)) 50.0%, calc(100% - 2.1 * var(--p)) 53.8%, calc(100% - 5.6 * var(--p)) 57.7%, calc(100% - 4.9 * var(--p)) 61.5%, calc(100% - 1.7 * var(--p)) 65.4%, calc(100% - 4.0 * var(--p)) 69.2%, calc(100% - 3.7 * var(--p)) 73.1%, calc(100% - 6.1 * var(--p)) 76.9%, calc(100% - 5.1 * var(--p)) 80.8%, calc(100% - 2.0 * var(--p)) 84.6%, calc(100% - 6.9 * var(--p)) 88.5%, calc(100% - 0.8 * var(--p)) 92.3%, calc(100% - 2.9 * var(--p)) 96.2%, calc(100% - 5.3 * var(--p)) 100.0%, 0 100%);
+}
+.sc-paper--right p {
+  position: absolute;
+  left: calc(92 * var(--p));
+  top: calc(40 * var(--p));
+  width: calc(250 * var(--p));
+  transform: rotate(90deg);
+  transform-origin: 0 0;
+  font: 400 calc(17 * var(--p)) / 1.35 var(--hand);
+  color: #45475a;
+  white-space: nowrap;
+}
+.sc-polaroid {
+  left: calc(76 * var(--p));
+  top: calc(70 * var(--p));
+  width: calc(318 * var(--p));
+  height: calc(464 * var(--p));
+  padding: calc(16 * var(--p)) calc(15 * var(--p)) 0;
+  background: #fbfbf9;
+  border-radius: calc(2 * var(--p));
+  transform: rotate(-1.5deg);
+  box-shadow: 0 calc(14 * var(--p)) calc(30 * var(--p)) rgba(0, 0, 0, .4), 0 1px 2px rgba(0, 0, 0, .2);
+}
+.sc-polaroid img {
+  width: 100%;
+  height: calc(378 * var(--p));
+  object-fit: cover;
+  filter: saturate(1.08) contrast(1.04);
+}
+.sc-tape {
+  left: calc(282 * var(--p));
+  top: calc(52 * var(--p));
+  width: calc(176 * var(--p));
+  height: calc(56 * var(--p));
+  transform: rotate(37deg);
+  background: linear-gradient(180deg, rgba(178, 214, 110, .92), rgba(146, 192, 82, .9));
+  clip-path: polygon(calc(0 * var(--p)) 0.0%, calc(4 * var(--p)) 16.7%, calc(0 * var(--p)) 33.3%, calc(4 * var(--p)) 50.0%, calc(0 * var(--p)) 66.7%, calc(4 * var(--p)) 83.3%, calc(0 * var(--p)) 100.0%, calc(100% - 0 * var(--p)) 100.0%, calc(100% - 4 * var(--p)) 83.3%, calc(100% - 0 * var(--p)) 66.7%, calc(100% - 4 * var(--p)) 50.0%, calc(100% - 0 * var(--p)) 33.3%, calc(100% - 4 * var(--p)) 16.7%, calc(100% - 0 * var(--p)) 0.0%);
+  mix-blend-mode: normal;
+}
 
 .stays-side {
   position: absolute;
