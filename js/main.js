@@ -27,13 +27,25 @@
   const reduceMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
   const root = document.documentElement;
 
+  // Phone layout (must match the @media query at the bottom of style.css)
+  const MQ = matchMedia('(max-width: 767px), (max-width: 1024px) and (orientation: portrait)');
+  let mobile = MQ.matches;
+
   let VW = innerWidth, VH = innerHeight;
-  let P = Math.min(VW, VH * 16 / 9) / 1920;          // 1 design px in CSS px
-  addEventListener('resize', () => {
+  let P = Math.min(VW, VH * 16 / 9) / 1920;          // 1 design px in CSS px (desktop grid)
+  let Q = 1;                                          // 1 design px in CSS px (430 px phone grid)
+  function measure() {
     VW = innerWidth; VH = innerHeight;
     P = Math.min(VW, VH * 16 / 9) / 1920;
+    mobile = MQ.matches;
+    const f = document.querySelector('.dest .frame');
+    Q = f ? f.offsetWidth / 430 : 1;
     destLastP = -1;
-  });
+    staysLast = null;
+    if (typeof applyPolLayout === 'function') applyPolLayout();
+  }
+  addEventListener('resize', measure);
+  if (MQ.addEventListener) MQ.addEventListener('change', measure);
 
   /* ------------------------------------------------------------------ *
    * Missing images → hide broken icon (or use data-fallback)
@@ -92,7 +104,12 @@
     el.textContent = '';
     const words = [], chars = [];
     for (const p of clean) {
-      if (p.br) { el.appendChild(document.createElement('br')); continue; }
+      if (p.br) {
+        // keep a (collapsible) space before the break so lines can re-flow on phones
+        if (el.lastChild && el.lastChild.nodeType === 1 && el.lastChild.className === 'w') el.appendChild(document.createTextNode(' '));
+        el.appendChild(document.createElement('br'));
+        continue;
+      }
       if (p.sp) { el.appendChild(document.createTextNode(' ')); continue; }
       const w = document.createElement('span');
       w.className = 'w';
@@ -179,9 +196,28 @@
     const target = id && id.length > 1 ? $(id) : null;
     if (!target) return;
     e.preventDefault();
-    if (lenis) lenis.scrollTo(target, { duration: 1.6 });
+    setMenu(false);
+    if (lenis) lenis.scrollTo(target, { duration: 1.6, force: true });
     else target.scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth' });
   }));
+
+  /* ------------------------------------------------------------------ *
+   * Mobile menu
+   * ------------------------------------------------------------------ */
+  const menuBtn = $('#menuBtn'), mMenu = $('#mobileMenu');
+  let menuOpen = false;
+  function setMenu(open) {
+    if (!menuBtn || open === menuOpen) return;
+    menuOpen = open;
+    root.classList.toggle('menu-open', open);
+    menuBtn.setAttribute('aria-expanded', String(open));
+    menuBtn.textContent = open ? 'Close' : 'Menu';
+    mMenu.setAttribute('aria-hidden', String(!open));
+    if (lenis) open ? lenis.stop() : lenis.start();
+  }
+  if (menuBtn) menuBtn.addEventListener('click', () => setMenu(!menuOpen));
+  addEventListener('keydown', e => { if (e.key === 'Escape') setMenu(false); });
+  MQ.addEventListener && MQ.addEventListener('change', () => { if (!MQ.matches) setMenu(false); });
 
 
   /* ------------------------------------------------------------------ *
@@ -229,6 +265,7 @@
   const lens = $('#lens'), lensWin = $('#lensWindow'), lensImg = $('#lensImg');
   let mx = VW / 2, my = VH / 2, lx = mx, ly = my, pointerSeen = false;
   hero.addEventListener('pointermove', e => {
+    if (mobile) return;                       // phones: the card stays centred
     const r = hero.getBoundingClientRect();
     mx = e.clientX - r.left;
     my = e.clientY - r.top;
@@ -237,6 +274,10 @@
   });
   function snapLens() { lx = mx; ly = my; }
   function updateLens() {
+    if (mobile) {
+      lx = mx = hero.clientWidth / 2;
+      ly = my = hero.clientHeight / 2;
+    }
     lx += (mx - lx) * .11;
     ly += (my - ly) * .11;
     const w = lens.offsetWidth, top = lensWin.offsetTop, h = lensWin.offsetHeight;
@@ -265,21 +306,31 @@
   const polStage = $('#polStage');
   if (CONFIG.polaroidImagesIncludeFrame) polStage.classList.add('images-have-frames');
   const listItems = $$('.dest-list li');
-  const pols = $$('.pol', polStage).map((el, i) => {
-    const v = n => parseFloat(el.style.getPropertyValue('--' + n));
-    const d = { el, key: el.dataset.key, x: v('x'), y: v('y'), w: v('w'), h: v('h'), r: v('r') };
-    // fly-in start: pushed outward from the cluster centre, bigger and more rotated
-    const cx = 960, cy = 640;
-    let dx = d.x - cx, dy = d.y - cy;
+  // fly-in start: pushed outward from the cluster centre, bigger and more rotated
+  function flyFrom(L, i, cx, cy, base, spread, drop) {
+    let dx = L.x - cx, dy = L.y - cy;
     const len = Math.hypot(dx, dy) || 1;
     dx /= len; dy /= len;
-    const dist = 560 + ((i * 173) % 280);
-    d.sx = dx * dist;
-    d.sy = dy * dist * .75 + 60;
-    d.sr = (i % 2 ? 1 : -1) * (14 + ((i * 7) % 12));
-    el.style.zIndex = i + 1;
+    const dist = base + ((i * 173) % spread);
+    L.sx = dx * dist;
+    L.sy = dy * dist * .75 + drop;
+    L.sr = (i % 2 ? 1 : -1) * (14 + ((i * 7) % 12));
+    return L;
+  }
+  const pols = $$('.pol', polStage).map((el, i) => {
+    const v = n => parseFloat(el.style.getPropertyValue('--' + n));
+    const d = { el, key: el.dataset.key, z: i + 1 };
+    d.desk = flyFrom({ x: v('x'), y: v('y'), w: v('w'), h: v('h'), r: v('r') }, i, 960, 640, 560, 280, 60);
+    if (el.classList.contains('pol--m')) {
+      d.mob = flyFrom({ x: v('mx'), y: v('my'), w: v('mw'), h: v('mh'), r: v('mr') }, i, 215, 360, 300, 90, 30);
+      d.mz = v('mz') || 1;
+    }
     return d;
   });
+  function applyPolLayout() {
+    pols.forEach(d => { d.el.style.zIndex = mobile && d.mob ? d.mz : d.z; });
+  }
+  applyPolLayout();
 
   function setHover(key) {
     pols.forEach(d => d.el.classList.toggle('is-hover', d.key === key));
@@ -303,11 +354,14 @@
     destLastP = p;
     const e = easeInOut(p), k = 1 - e;
     const s = lerp(1.32, 1, e);
-    const b = lerp(1, .72, range(e, .55, 1));
+    const b = mobile ? 1 : lerp(1, .72, range(e, .55, 1));   // phones keep the cards bright
+    const U = mobile ? Q : P;
     for (const d of pols) {
-      const x = d.x + d.sx * k, y = d.y + d.sy * k, r = d.r + d.sr * k;
+      const L = mobile ? d.mob : d.desk;
+      if (!L) continue;                                         // hidden on phones
+      const x = L.x + L.sx * k, y = L.y + L.sy * k, r = L.r + L.sr * k;
       d.el.style.transform =
-        `translate3d(${((x - d.w / 2) * P).toFixed(2)}px, ${((y - d.h / 2) * P).toFixed(2)}px, 0) rotate(${r.toFixed(2)}deg) scale(${s.toFixed(4)})`;
+        `translate3d(${((x - L.w / 2) * U).toFixed(2)}px, ${((y - L.h / 2) * U).toFixed(2)}px, 0) rotate(${r.toFixed(2)}deg) scale(${s.toFixed(4)})`;
       d.el.style.setProperty('--b', b.toFixed(3));
     }
   }
@@ -392,10 +446,16 @@
     activeCol = i;
   }
   cols.forEach((c, i) => {
-    c.addEventListener('pointerenter', e => { if (e.pointerType !== 'touch') activate(i); });
-    c.addEventListener('click', () => activate(i));
-    c.addEventListener('focus', () => activate(i));
+    c.addEventListener('pointerenter', e => { if (!mobile && e.pointerType !== 'touch') activate(i); });
+    c.addEventListener('click', () => { if (!mobile) activate(i); });
+    c.addEventListener('focus', () => { if (!mobile) activate(i); });
   });
+  // phones: the four cards are stacked; each one reveals its copy as it scrolls in
+  function updateHowMobile() {
+    for (const c of cols) {
+      if (!c.classList.contains('m-in') && c.getBoundingClientRect().top < VH * .82) c.classList.add('m-in');
+    }
+  }
 
 
   /* ------------------------------------------------------------------ *
@@ -474,16 +534,18 @@
 
     // how we travel
     const hw = how.getBoundingClientRect();
-    if (hw.top < VH * .55) { howHead.classList.add('is-in'); howTitle.classList.add('is-in'); }
+    if (hw.top < VH * (mobile ? .75 : .55)) { howHead.classList.add('is-in'); howTitle.classList.add('is-in'); }
+    if (mobile && hw.top < VH && hw.bottom > 0) updateHowMobile();
 
     // plan + footer
     const pr = planWrap.getBoundingClientRect();
     if (pr.top < VH * 1.1) updatePlan(note.getBoundingClientRect(), pr);
 
     // header fades out over the light "plan" section
-    header.classList.toggle('is-hidden', pr.top < 190 * P);
+    header.classList.toggle('is-hidden', !menuOpen && pr.top < (mobile ? 64 * Q : 190 * P));
 
     requestAnimationFrame(frame);
   }
+  measure();
   requestAnimationFrame(frame);
 })();

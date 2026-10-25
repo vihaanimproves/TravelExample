@@ -29,7 +29,24 @@
       <svg class="ico-arrow" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 1.5v7.5h10.5M10 5.5l3.5 3.5-3.5 3.5"/></svg>
       <span>Explore destinations</span>
     </a>
+
+    <!-- Mobile only -->
+    <button class="menu-btn" id="menuBtn" type="button" aria-expanded="false" aria-controls="mobileMenu">Menu</button>
   </header>
+
+  <!-- Mobile menu overlay (mobile only) -->
+  <div class="m-menu" id="mobileMenu" aria-hidden="true">
+    <nav class="m-menu-nav" aria-label="Mobile">
+      <a href="#destinations" data-scroll><i>J</i>ournal</a>
+      <a href="#experiences" data-scroll><i>E</i>xperiences</a>
+      <a href="#about" data-scroll><i>A</i>bout</a>
+      <a href="#contact" data-scroll><i>C</i>ontact</a>
+    </nav>
+    <a class="m-menu-explore" href="#destinations" data-scroll>
+      <svg class="ico-arrow" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 1.5v7.5h10.5M10 5.5l3.5 3.5-3.5 3.5"/></svg>
+      <span>Explore destinations</span>
+    </a>
+  </div>
 
   <main>
 
@@ -64,6 +81,12 @@
       </h1>
 
       <div class="view-toggle" role="group" aria-label="View"><button class="is-active" type="button">Slider</button><span class="sep"> / </span><button type="button">List</button></div>
+
+      <!-- Mobile only -->
+      <a class="hero-explore" href="#destinations" data-scroll>
+        <svg class="ico-arrow" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 1.5v7.5h10.5M10 5.5l3.5 3.5-3.5 3.5"/></svg>
+        <span>Explore destinations</span>
+      </a>
 
       <ul class="dest-filter" aria-label="Filter destinations">
         <li class="is-active" tabindex="0">All destinations</li>
@@ -106,6 +129,7 @@
           Polaroids. Positions are in design pixels on a 1920×1080 frame:
           --x / --y = centre, --w / --h = card size, --r = rotation (deg).
           Listed bottom-to-top (later = on top).
+          Phones show only the three .pol--m cards, using the --m* values (430 px wide grid).
         -->
         <div class="pol-clip">
           <div class="pol-stage" id="polStage">
@@ -113,7 +137,7 @@
               <div class="pol-inner"><div class="pol-photo"><img src="https://images.unsplash.com/photo-1528493366314-e317cd98dd52?auto=format&amp;fit=crop&amp;w=520&amp;q=80" data-fallback="https://images.unsplash.com/photo-1530122037265-a5f1f91d3b99?auto=format&amp;fit=crop&amp;w=520&amp;q=80" alt="Switzerland"></div><figcaption><i>S</i>witzerland</figcaption>
                 <img class="sticker" src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2064%2064'%3E%3Crect%20x='2'%20y='2'%20width='60'%20height='60'%20rx='7'%20fill='%23fff'/%3E%3Crect%20x='6'%20y='6'%20width='52'%20height='52'%20rx='4'%20fill='%23d52b1e'/%3E%3Crect%20x='26'%20y='14'%20width='12'%20height='36'%20fill='%23fff'/%3E%3Crect%20x='14'%20y='26'%20width='36'%20height='12'%20fill='%23fff'/%3E%3C/svg%3E" alt="" style="--sx:62;--sy:34;--sw:70;--sr:8"></div>
             </figure>
-            <figure class="pol" data-key="norway" style="--x:415;--y:283;--w:210;--h:188;--r:8">
+            <figure class="pol pol--m" data-key="norway" style="--x:415;--y:283;--w:210;--h:188;--r:8;--mx:280;--my:331;--mw:142;--mh:122;--mr:8.5;--mz:2">
               <div class="pol-inner"><div class="pol-photo"><img src="https://images.unsplash.com/photo-1602836948295-14b195efa63d?auto=format&amp;fit=crop&amp;w=520&amp;q=80" data-fallback="https://images.unsplash.com/photo-1639687811358-d1aab80c9f84?auto=format&amp;fit=crop&amp;w=520&amp;q=80" alt="Norway"></div><figcaption><i>N</i>orway</figcaption></div>
             </figure>
             <figure class="pol" data-key="austria" style="--x:1552;--y:310;--w:182;--h:308;--r:-17">
@@ -128,7 +152,7 @@
             <figure class="pol" data-key="italy" style="--x:376;--y:663;--w:204;--h:320;--r:-7">
               <div class="pol-inner"><div class="pol-photo"><img src="https://images.unsplash.com/photo-1707566927029-8af936850af3?auto=format&amp;fit=crop&amp;w=520&amp;q=80" data-fallback="https://images.unsplash.com/photo-1552832230-c0197dd311b5?auto=format&amp;fit=crop&amp;w=520&amp;q=80" alt="Italy"></div><figcaption><i>I</i>taly</figcaption></div>
             </figure>
-            <figure class="pol" data-key="japan" style="--x:574;--y:567;--w:214;--h:177;--r:18">
+            <figure class="pol pol--m" data-key="japan" style="--x:574;--y:567;--w:214;--h:177;--r:18;--mx:148;--my:313;--mw:127;--mh:112;--mr:15.5;--mz:1">
               <div class="pol-inner"><div class="pol-photo"><img src="https://images.unsplash.com/photo-1574236170901-59c2f5c99c75?auto=format&amp;fit=crop&amp;w=520&amp;q=80" data-fallback="https://images.unsplash.com/photo-1677254817050-cb9b29fbb16e?auto=format&amp;fit=crop&amp;w=520&amp;q=80" alt="Japan"></div><figcaption><i>J</i>apan</figcaption>
                 <img class="sticker" src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20xmlns:xlink='http://www.w3.org/1999/xlink'%20viewBox='-3%20-3%2036%2066'%3E%3Cdefs%3E%3Cg%20id='l'%3E%3Cpath%20d='M15%2058%20C%2015%2044,%2016%2030,%2015%2014'%20stroke='%234f7a3a'%20stroke-width='1.6'%20fill='none'/%3E%3Cg%20fill='%235f8f45'%3E%3Cellipse%20cx='9'%20cy='50'%20rx='7'%20ry='2.4'%20transform='rotate(-35%209%2050)'/%3E%3Cellipse%20cx='21'%20cy='50'%20rx='7'%20ry='2.4'%20transform='rotate(35%2021%2050)'/%3E%3Cellipse%20cx='10'%20cy='54'%20rx='6'%20ry='2'%20transform='rotate(-10%2010%2054)'/%3E%3Cellipse%20cx='20'%20cy='54'%20rx='6'%20ry='2'%20transform='rotate(10%2020%2054)'/%3E%3C/g%3E%3Cellipse%20cx='12.7'%20cy='40.0'%20rx='4.2'%20ry='3.4'%20fill='%237a5bc0'/%3E%3Cellipse%20cx='17.3'%20cy='38.8'%20rx='4.2'%20ry='3.4'%20fill='%239a7ad8'/%3E%3Cellipse%20cx='12.8'%20cy='36.9'%20rx='3.9'%20ry='3.1'%20fill='%239a7ad8'/%3E%3Cellipse%20cx='17.2'%20cy='35.7'%20rx='3.9'%20ry='3.1'%20fill='%236a4aa8'/%3E%3Cellipse%20cx='13.0'%20cy='33.8'%20rx='3.6'%20ry='2.9'%20fill='%236a4aa8'/%3E%3Cellipse%20cx='17.0'%20cy='32.6'%20rx='3.6'%20ry='2.9'%20fill='%237a5bc0'/%3E%3Cellipse%20cx='13.2'%20cy='30.7'%20rx='3.4'%20ry='2.7'%20fill='%237a5bc0'/%3E%3Cellipse%20cx='16.8'%20cy='29.5'%20rx='3.4'%20ry='2.7'%20fill='%239a7ad8'/%3E%3Cellipse%20cx='13.3'%20cy='27.6'%20rx='3.1'%20ry='2.5'%20fill='%239a7ad8'/%3E%3Cellipse%20cx='16.7'%20cy='26.4'%20rx='3.1'%20ry='2.5'%20fill='%236a4aa8'/%3E%3Cellipse%20cx='13.5'%20cy='24.5'%20rx='2.8'%20ry='2.2'%20fill='%236a4aa8'/%3E%3Cellipse%20cx='16.5'%20cy='23.3'%20rx='2.8'%20ry='2.2'%20fill='%237a5bc0'/%3E%3Cellipse%20cx='13.6'%20cy='21.4'%20rx='2.5'%20ry='2.0'%20fill='%237a5bc0'/%3E%3Cellipse%20cx='16.4'%20cy='20.2'%20rx='2.5'%20ry='2.0'%20fill='%239a7ad8'/%3E%3Cellipse%20cx='13.8'%20cy='18.3'%20rx='2.2'%20ry='1.8'%20fill='%239a7ad8'/%3E%3Cellipse%20cx='16.2'%20cy='17.1'%20rx='2.2'%20ry='1.8'%20fill='%236a4aa8'/%3E%3Cellipse%20cx='13.9'%20cy='15.2'%20rx='2.0'%20ry='1.6'%20fill='%236a4aa8'/%3E%3Cellipse%20cx='16.1'%20cy='14.0'%20rx='2.0'%20ry='1.6'%20fill='%237a5bc0'/%3E%3Cellipse%20cx='14.1'%20cy='12.1'%20rx='1.7'%20ry='1.3'%20fill='%237a5bc0'/%3E%3Cellipse%20cx='15.9'%20cy='10.9'%20rx='1.7'%20ry='1.3'%20fill='%239a7ad8'/%3E%3Cellipse%20cx='14.2'%20cy='9.0'%20rx='1.4'%20ry='1.1'%20fill='%239a7ad8'/%3E%3Cellipse%20cx='15.8'%20cy='7.8'%20rx='1.4'%20ry='1.1'%20fill='%236a4aa8'/%3E%3C/g%3E%3C/defs%3E%3Cuse%20href='%23l'%20xlink:href='%23l'%20stroke='%23fff'%20stroke-width='3.4'%20stroke-linejoin='round'/%3E%3Cuse%20href='%23l'%20xlink:href='%23l'/%3E%3C/svg%3E" alt="" style="--sx:14;--sy:112;--sw:40;--sr:-8"></div>
             </figure>
@@ -145,7 +169,7 @@
             <figure class="pol" data-key="france" style="--x:966;--y:699;--w:187;--h:313;--r:21">
               <div class="pol-inner"><div class="pol-photo"><img src="https://images.unsplash.com/photo-1511739001486-6bfe10ce785f?auto=format&amp;fit=crop&amp;w=520&amp;q=80" data-fallback="https://images.unsplash.com/photo-1502602898657-3e91760cbb34?auto=format&amp;fit=crop&amp;w=520&amp;q=80" alt="France"></div><figcaption><i>F</i>rance</figcaption></div>
             </figure>
-            <figure class="pol" data-key="iceland" style="--x:1318;--y:627;--w:180;--h:260;--r:30">
+            <figure class="pol pol--m" data-key="iceland" style="--x:1318;--y:627;--w:180;--h:260;--r:30;--mx:209;--my:389;--mw:106;--mh:134;--mr:29;--mz:3">
               <div class="pol-inner"><div class="pol-photo"><img src="https://images.unsplash.com/photo-1767636417773-e9f5fc579468?auto=format&amp;fit=crop&amp;w=520&amp;q=80" data-fallback="https://images.unsplash.com/photo-1781348424213-468c60e1c76a?auto=format&amp;fit=crop&amp;w=520&amp;q=80" alt="Iceland"></div><figcaption><i>I</i>celand</figcaption>
                 <img class="sticker" src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2052%2038'%3E%3Crect%20width='52'%20height='38'%20rx='5'%20fill='%23fff'/%3E%3Crect%20x='3'%20y='3'%20width='46'%20height='32'%20rx='3'%20fill='%2302529c'/%3E%3Crect%20x='15'%20y='3'%20width='8'%20height='32'%20fill='%23fff'/%3E%3Crect%20x='3'%20y='15'%20width='46'%20height='8'%20fill='%23fff'/%3E%3Crect%20x='17'%20y='3'%20width='4'%20height='32'%20fill='%23dc1e35'/%3E%3Crect%20x='3'%20y='17'%20width='46'%20height='4'%20fill='%23dc1e35'/%3E%3C/svg%3E" alt="" style="--sx:170;--sy:36;--sw:42;--sr:-28"></div>
             </figure>
@@ -333,7 +357,7 @@
           </div>
 
           <form class="newsletter" id="newsletter">
-            <p>Stories, guides &amp; ideas for wherever<br>you’re headed next.</p>
+            <p>Stories, guides &amp; ideas for wherever <br>you’re headed next.</p>
             <label class="nl-field">
               <input type="email" name="email" placeholder="Your e-mail" required aria-label="Your e-mail">
               <button type="submit" aria-label="Subscribe"><svg class="ico-arrow" viewBox="0 0 16 16"><path d="M3 1.5v7.5h10.5M10 5.5l3.5 3.5-3.5 3.5"/></svg></button>
